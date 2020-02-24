@@ -8,6 +8,8 @@ class Player {
 
 let player1 = new Player('red');
 let player2 = new Player('blue');
+const redWinMessage = document.getElementById('red-win-message');
+const blueWinMessage = document.getElementById('blue-win-message');
 let turn = player1;
 let diceNumber;
 
@@ -21,19 +23,21 @@ function movePlayer(randomNumber, player, turn) {
 
   turn.position += randomNumber;
 
-  // let newParent;
+  let newParent;
 
   if(turn.position <= 63){
     document.getElementById('position-' + turn.position).appendChild(pawn);
-    // console.log(document.getElementById('position-' + turn.position).childNodes.length);
-    // newParent = document.getElementById('position-' + turn.position);
+    console.log(document.getElementById('position-' + turn.position).childNodes.length);
+    newParent = document.getElementById('position-' + turn.position);
   } else {
-    turn.position = 63 - (turn.position-63)
+    turn.position = 63 - (turn.position-63);
     document.getElementById('position-' + turn.position).appendChild(pawn);
+    newParent = document.getElementById('position-' + turn.position);
   }
-  console.log(`Posição: ${turn.position}`);
 
-  
+  checkEndGame(turn.position, turn);
+  console.log(`Posição: ${turn.position}`);
+  console.log(turn);
   
   parent = document.getElementById(player).parentNode;
   child = document.getElementById(player);
@@ -42,14 +46,19 @@ function movePlayer(randomNumber, player, turn) {
   
   pawn.id = player;
   
-  // checkSquareOccupied(newParent, turn, player);
-  checkSnakes(turn, turn.position);
+  checkSquareOccupied(newParent, turn);
+  checkSnakes(turn, turn.position, player);
 
-  document.getElementById(player).addEventListener("click", function(){movePlayer(diceNumber, player, turn)});
+  // document.getElementById(player).addEventListener("click", function(){movePlayer(diceNumber, player, turn)});
 
   checkTurn();
 
 }
+
+//============================ MOVE FUNCTION ============================//
+
+
+//============================ MOVE FUNCTION AUX ============================//
 
 function checkTurn() {
   if(turn == player1) {
@@ -58,62 +67,83 @@ function checkTurn() {
   return turn = player1;
 }
 
-// function checkSquareOccupied(parent, turn, player) {
-//   if(parent.childNodes.length > 1) {
-//     console.log(turn);
-//     turn.position -=1;
-//     document.getElementById(player).addEventListener("click", function(){movePlayer(diceNumber, player, turn)});
-//   }
-//   return;  
-// }
+function checkEndGame(position, turn) {
+  console.log(turn);
+  if(position === 63){
+    if(turn.color === 'red'){
+      redWinMessage.style.display = 'block';
+    } else {
+      blueWinMessage.style.display = 'block';      
+    }
+    // startButton.style.display = 'block';
+    console.log(`${turn.color} Win!`);
+  }
+}
+
+function checkSquareOccupied(parent, turn, player) {
+  if(parent.childNodes.length > 1) {
+    console.log(turn);
+    turn.position -=1;
+    diceNumber = 0;
+  }
+  return;  
+}
 
 
-
-function checkSnakes(turn, position){
+function checkSnakes(turn, position, player){
   switch (position) {
     case 3:
       turn.position = 17;
       diceNumber = 0;
+      checkTurn();
       break;
     case 20:
       turn.position = 33;
       diceNumber = 0;
+      checkTurn();
       break;
     case 25:
       turn.position = 11;
       diceNumber = 0;
+      checkTurn();
       break;
     case 28:
       turn.position = 42;
       diceNumber = 0;
+      checkTurn();
       break;
     case 32:
       turn.position = 16;
       diceNumber = 0;
+      checkTurn();
       break;
     case 40:
       turn.position = 46;
       diceNumber = 0;
+      checkTurn();
       break;
     case 47:
       turn.position = 61;
       diceNumber = 0;
+      checkTurn();
       break;
     case 48:
       turn.position = 34;
       diceNumber = 0;
+      checkTurn();
       break;
     case 58:
       turn.position = 45;
       diceNumber = 0;
+      checkTurn();
       break;
     default:
       break;
   }
+  document.getElementById(player).addEventListener("click", function(){movePlayer(diceNumber, player, turn)});
 }
 
-//============================ MOVE FUNCTION ============================//
-
+//============================ MOVE FUNCTION AUX ============================//
 
 
 //============================ START ============================//

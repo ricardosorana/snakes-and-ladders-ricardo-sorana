@@ -16,6 +16,36 @@ h1 {
   transform: translate(-50%, -50%)
 }
 
+#red-win-message {
+  display: none;
+  position: absolute;
+  margin-left: 33%;
+  margin-top: 350px;
+}
+#red-win-message p {
+  font-size: 20px;
+  margin-top: 480px;
+}
+
+#red-win-message h1{
+  color: red;
+}
+
+#blue-win-message {
+  display: none;
+  position: absolute;
+  margin-left: 33%;
+  margin-top: 350px;
+}
+#blue-win-message p {
+  font-size: 20px;
+  margin-top: 480px;
+}
+
+#blue-win-message h1{
+  color: blue;
+}
+
 #ladders {
   color: brown;
 }
