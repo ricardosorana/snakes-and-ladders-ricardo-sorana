@@ -1,15 +1,17 @@
 class Player {
-  constructor(color) {
+  constructor(color, turn, id) {
     this.color = color;
     this.position = 1;
+    this.turn = turn;
+    this.id = id;
   }
 
 }
 
-let player1 = new Player('red');
-let player2 = new Player('blue');
-let player3 = new Player('green');
-let player4 = new Player('white');
+let player1 = new Player('red', 'player1', 'red-player');
+let player2 = new Player('blue', 'player2', 'blue-player');
+let player3 = new Player('green', 'player3', 'green-player');
+let player4 = new Player('white', 'player4', 'white-player');
 const redWinMessage = document.getElementById('red-win-message');
 const blueWinMessage = document.getElementById('blue-win-message');
 const greenWinMessage = document.getElementById('green-win-message');
@@ -19,14 +21,13 @@ let numPlayers;
 let turn = player1;
 let diceNumber;
 
-
-
 //============================ MOVE FUNCTION ============================//
 
 function movePlayer(randomNumber, player, turn) {
 
   let pawn = document.createElement('div');
-
+  console.log(turn)
+  console.log(player1, player2, player3, player4);
   turn.position += randomNumber;
 
   let newParent;
@@ -53,11 +54,15 @@ function movePlayer(randomNumber, player, turn) {
   pawn.id = player;
   
   checkSquareOccupied(newParent, turn);
+
   checkSnakes(turn, turn.position, player);
 
   // document.getElementById(player).addEventListener("click", function(){movePlayer(diceNumber, player, turn)});
 
   checkTurn();
+
+  diceNumber = 0;
+  document.getElementById("button").style.display = 'block';
 
 }
 
@@ -68,40 +73,33 @@ function movePlayer(randomNumber, player, turn) {
 
 function checkTurn() {
   if(numPlayers === 2){
-    console.log('teste');
     if(turn === player1) {
-      console.log('red-blue');
-      return turn = player2;
+      turn = player2;
+      return turn;
     } else {
-      console.log('blue-red');
-      return turn = player1;
+      turn = player1;
+      return turn;
     }
   } else if (numPlayers === 3) {
-    console.log('teste');
     if(turn === player1) {
-      console.log('red-blue');
-      return turn = player2;
+      turn = player2;
+      return turn;
     } else if(turn === player2) {
-      console.log('blue-green');
-      return turn = player3;
+      turn = player3;
+      return turn;
     } else {
-      console.log('green-red');
-      return turn = player1;
+      turn = player1;
+      return turn;
     }
   }
 
-  console.log('teste');
     if(turn === player1) {
-      console.log('red-blue');
       return turn = player2;
     } else if(turn === player2) {
-      console.log('blue-green');
       return turn = player3;
     } else if(turn === player3) {
-      console.log('green-white');
       return turn = player4;
     } else {
-      console.log('white-red');
       return turn = player1;
     }
 }
@@ -303,7 +301,12 @@ function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-document.getElementById("button").addEventListener("click", rollDice);
+document.getElementById("button").addEventListener('click', () => {
+  rollDice();
+  document.getElementById("button").style.display = 'none';
+});
+
+// document.getElementById("button").addEventListener("click", rollDice);
 
 //============================ DICE FUNCTION ============================//
 

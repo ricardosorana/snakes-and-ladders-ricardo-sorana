@@ -29,7 +29,7 @@ The game has very simple rules, and I made just a few adaptations to make this w
 Below are the rules for this particular Snakes & Ladders game and I am also adding a link with the original rules.
 More details about it in the "Improvements" section of this read.me.
 
-* ** The game can be played for two to four players (Pendente)
+* The game can be played for two to four players.
 * ** To start the game, the players have to roll the dice. The highest number starts. (Pendente)
 * The game will be played with just one dice.
 * In each color's turn, the player must roll the dice and then click in their own pawn in order to make the move.
@@ -38,10 +38,10 @@ More details about it in the "Improvements" section of this read.me.
 * If a player's pawn lands on the lower-numbered end of a "ladder", the player moves the pawn up to the ladder's higher-numbered square (with another click on the pawn).
 * If the player lands on the higher-numbered square of a "snake", the pawn must be moved down to the snake's lower-numbered square (with another click on the pawn).
 * ** If a player rolls a 6, the player may, after moving, immediately take another turn (otherwise play passes to the next player in turn). (Pendente)
-* ** The player who is first to bring their pawn to the last square of the track is the winner. (Pendente)
+* The player who is first to bring their pawn to the last square of the track is the winner.
 * The player must roll the exact number to reach the final square.
 * If the dice roll is too large, the pawn goes off the final square and back again (for example, if a player requiring a 3 to win rolls a 5, the pawn moves forward three spaces, then back two spaces).
-* ** If a player lands in a square that already contains another player's pawn, this player moves one square back. (Pendente)
+* If a player lands in a square that already contains another player's pawn, this player moves one square back.
 
 
 * Original Rules (there are other rules with some variations, but this one is the most commonly used): [link](https://www.wikihow.com/Play-Snakes-and-Ladders).
