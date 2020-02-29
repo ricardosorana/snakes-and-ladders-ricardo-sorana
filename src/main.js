@@ -26,15 +26,12 @@ let diceNumber;
 function movePlayer(randomNumber, player, turn) {
 
   let pawn = document.createElement('div');
-  // console.log(turn)
-  // console.log(player1, player2, player3, player4);
   turn.position += randomNumber;
 
   let newParent;
 
   if(turn.position <= 63){
     document.getElementById('position-' + turn.position).appendChild(pawn);
-    // console.log(document.getElementById('position-' + turn.position).childNodes.length);
     newParent = document.getElementById('position-' + turn.position);
   } else {
     turn.position = 63 - (turn.position-63);
@@ -43,8 +40,6 @@ function movePlayer(randomNumber, player, turn) {
   }
 
   checkEndGame(turn.position, turn);
-  // console.log(`Posição: ${turn.position}`);
-  // console.log(turn);
   
   parent = document.getElementById(player).parentNode;
   child = document.getElementById(player);
@@ -52,15 +47,16 @@ function movePlayer(randomNumber, player, turn) {
   parent.removeChild(child);
   
   pawn.id = player;
+
+  if(diceNumber > 0) {
+    checkTurn();
+  }
   
   checkSquareOccupied(newParent, turn);
 
   checkSnakes(turn, turn.position, player);
 
 
-  if(diceNumber > 0) {
-    checkTurn();
-  }
 
 
   diceNumber = 0;
@@ -120,7 +116,6 @@ function checkTurn() {
 }
 
 function checkEndGame(position, turn) {
-  // console.log(turn);
   if(position === 63){
     if(turn.color === 'red'){
       redWinMessage.style.display = 'block';
@@ -137,9 +132,17 @@ function checkEndGame(position, turn) {
 function checkSquareOccupied(parent, turn, player) {
   if(parent.childNodes.length > 1) {
     turn.position -=1;
+
+    if(parent.previousElementSibling.childNodes.length >= 1 && turn.position > 1) {
+      turn.position -= 1;
+      diceNumber = 0;
+      if(parent.previousElementSibling.previousElementSibling.childNodes.length >= 1 && turn.position > 1) {
+        turn.position -= 1;
+        diceNumber = 0;
+        return;
+      }
+    }
     diceNumber = 0;
-    checkTurn();
-    // checkSnakes(turn, turn.position, player);
   }
   return;  
 }
@@ -150,47 +153,38 @@ function checkSnakes(turn, position, player){
     case 3:
       turn.position = 17;
       diceNumber = 0;
-      checkTurn();
       break;
     case 20:
       turn.position = 33;
       diceNumber = 0;
-      checkTurn();
       break;
     case 25:
       turn.position = 11;
       diceNumber = 0;
-      checkTurn();
       break;
     case 28:
       turn.position = 42;
       diceNumber = 0;
-      checkTurn();
       break;
     case 32:
       turn.position = 16;
       diceNumber = 0;
-      checkTurn();
       break;
     case 40:
       turn.position = 46;
       diceNumber = 0;
-      checkTurn();
       break;
     case 47:
       turn.position = 61;
       diceNumber = 0;
-      checkTurn();
       break;
     case 48:
       turn.position = 34;
       diceNumber = 0;
-      checkTurn();
       break;
     case 58:
       turn.position = 45;
       diceNumber = 0;
-      checkTurn();
       break;
     default:
       break;
@@ -215,6 +209,8 @@ twoPlayerButton.addEventListener('click', () => {
   twoPlayerButton.style.display = 'none';
   threePlayerButton.style.display = 'none';
   fourPlayerButton.style.display = 'none';
+  document.getElementById("button").style.display = 'block';
+
 
   let pawnRed = document.createElement('div');
   pawnRed.id = "red-player";
@@ -235,6 +231,7 @@ threePlayerButton.addEventListener('click', () => {
   twoPlayerButton.style.display = 'none';
   threePlayerButton.style.display = 'none';
   fourPlayerButton.style.display = 'none';
+  document.getElementById("button").style.display = 'block';
 
   let pawnRed = document.createElement('div');
   pawnRed.id = "red-player";
@@ -260,6 +257,7 @@ fourPlayerButton.addEventListener('click', () => {
   twoPlayerButton.style.display = 'none';
   threePlayerButton.style.display = 'none';
   fourPlayerButton.style.display = 'none';
+  document.getElementById("button").style.display = 'block';
 
   let pawnRed = document.createElement('div');
   pawnRed.id = "red-player";
