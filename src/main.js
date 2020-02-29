@@ -117,6 +117,7 @@ function checkTurn() {
 
 function checkEndGame(position, turn) {
   if(position === 63){
+    document.getElementById("turn-color").style.display = 'none';
     if(turn.color === 'red'){
       redWinMessage.style.display = 'block';
     } else if(turn.color === 'blue'){
@@ -210,6 +211,7 @@ twoPlayerButton.addEventListener('click', () => {
   threePlayerButton.style.display = 'none';
   fourPlayerButton.style.display = 'none';
   document.getElementById("button").style.display = 'block';
+  document.getElementById("turn-color").style.display = 'block';
 
 
   let pawnRed = document.createElement('div');
@@ -232,6 +234,8 @@ threePlayerButton.addEventListener('click', () => {
   threePlayerButton.style.display = 'none';
   fourPlayerButton.style.display = 'none';
   document.getElementById("button").style.display = 'block';
+  document.getElementById("turn-color").style.display = 'block';
+
 
   let pawnRed = document.createElement('div');
   pawnRed.id = "red-player";
@@ -258,6 +262,8 @@ fourPlayerButton.addEventListener('click', () => {
   threePlayerButton.style.display = 'none';
   fourPlayerButton.style.display = 'none';
   document.getElementById("button").style.display = 'block';
+  document.getElementById("turn-color").style.display = 'block';
+
 
   let pawnRed = document.createElement('div');
   pawnRed.id = "red-player";
