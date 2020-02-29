@@ -5,7 +5,6 @@ class Player {
     this.turn = turn;
     this.id = id;
   }
-
 }
 
 let player1 = new Player('red', 'player1', 'red-player');
@@ -17,6 +16,7 @@ const blueWinMessage = document.getElementById('blue-win-message');
 const greenWinMessage = document.getElementById('green-win-message');
 const whiteWinMessage = document.getElementById('white-win-message');
 let numPlayers;
+let turnColor = document.getElementById('turn-color');
 
 let turn = player1;
 let diceNumber;
@@ -26,15 +26,15 @@ let diceNumber;
 function movePlayer(randomNumber, player, turn) {
 
   let pawn = document.createElement('div');
-  console.log(turn)
-  console.log(player1, player2, player3, player4);
+  // console.log(turn)
+  // console.log(player1, player2, player3, player4);
   turn.position += randomNumber;
 
   let newParent;
 
   if(turn.position <= 63){
     document.getElementById('position-' + turn.position).appendChild(pawn);
-    console.log(document.getElementById('position-' + turn.position).childNodes.length);
+    // console.log(document.getElementById('position-' + turn.position).childNodes.length);
     newParent = document.getElementById('position-' + turn.position);
   } else {
     turn.position = 63 - (turn.position-63);
@@ -43,8 +43,8 @@ function movePlayer(randomNumber, player, turn) {
   }
 
   checkEndGame(turn.position, turn);
-  console.log(`Posição: ${turn.position}`);
-  console.log(turn);
+  // console.log(`Posição: ${turn.position}`);
+  // console.log(turn);
   
   parent = document.getElementById(player).parentNode;
   child = document.getElementById(player);
@@ -57,16 +57,18 @@ function movePlayer(randomNumber, player, turn) {
 
   checkSnakes(turn, turn.position, player);
 
-  // document.getElementById(player).addEventListener("click", function(){movePlayer(diceNumber, player, turn)});
 
-  checkTurn();
+  if(diceNumber > 0) {
+    checkTurn();
+  }
+
 
   diceNumber = 0;
   document.getElementById("button").style.display = 'block';
 
 }
 
-//============================ MOVE FUNCTION ============================//
+//============================ END MOVE FUNCTION ============================//
 
 
 //============================ MOVE FUNCTION AUX ============================//
@@ -75,37 +77,50 @@ function checkTurn() {
   if(numPlayers === 2){
     if(turn === player1) {
       turn = player2;
+      turnColor.style.backgroundColor = 'blue';
       return turn;
     } else {
       turn = player1;
+      turnColor.style.backgroundColor = 'red';
       return turn;
     }
   } else if (numPlayers === 3) {
     if(turn === player1) {
       turn = player2;
+      turnColor.style.backgroundColor = 'blue';
       return turn;
     } else if(turn === player2) {
       turn = player3;
+      turnColor.style.backgroundColor = 'green';
       return turn;
     } else {
       turn = player1;
+      turnColor.style.backgroundColor = 'red';
       return turn;
     }
   }
 
     if(turn === player1) {
-      return turn = player2;
+      turn = player2;
+      turnColor.style.backgroundColor = 'blue';
+      return turn;
     } else if(turn === player2) {
-      return turn = player3;
+      turn = player3;
+      turnColor.style.backgroundColor = 'green';
+      return turn;
     } else if(turn === player3) {
-      return turn = player4;
+      turn = player4;
+      turnColor.style.backgroundColor = 'white';
+      return turn;
     } else {
-      return turn = player1;
+      turn = player1;
+      turnColor.style.backgroundColor = 'red';
+      return turn;
     }
 }
 
 function checkEndGame(position, turn) {
-  console.log(turn);
+  // console.log(turn);
   if(position === 63){
     if(turn.color === 'red'){
       redWinMessage.style.display = 'block';
@@ -116,16 +131,15 @@ function checkEndGame(position, turn) {
     } else {
       whiteWinMessage.style.display = 'block';
     }
-    // startButton.style.display = 'block';
-    console.log(`${turn.color} Win!`);
   }
 }
 
 function checkSquareOccupied(parent, turn, player) {
   if(parent.childNodes.length > 1) {
-    console.log(turn);
     turn.position -=1;
     diceNumber = 0;
+    checkTurn();
+    // checkSnakes(turn, turn.position, player);
   }
   return;  
 }
@@ -184,7 +198,7 @@ function checkSnakes(turn, position, player){
   document.getElementById(player).addEventListener("click", function(){movePlayer(diceNumber, player, turn)});
 }
 
-//============================ MOVE FUNCTION AUX ============================//
+//============================ END MOVE FUNCTION AUX ============================//
 
 
 //============================ PLAYER CHOOSE ============================//
@@ -207,7 +221,6 @@ twoPlayerButton.addEventListener('click', () => {
   document.getElementById('position-1').appendChild(pawnRed);
   document.getElementById("red-player").addEventListener("click", function(){movePlayer(diceNumber, "red-player", turn)});
 
-
   let pawnBlue = document.createElement('div');
   pawnBlue.id = "blue-player";
   document.getElementById('position-1').appendChild(pawnBlue);
@@ -227,7 +240,6 @@ threePlayerButton.addEventListener('click', () => {
   pawnRed.id = "red-player";
   document.getElementById('position-1').appendChild(pawnRed);
   document.getElementById("red-player").addEventListener("click", function(){movePlayer(diceNumber, "red-player", turn)});
-
 
   let pawnBlue = document.createElement('div');
   pawnBlue.id = "blue-player";
@@ -254,7 +266,6 @@ fourPlayerButton.addEventListener('click', () => {
   document.getElementById('position-1').appendChild(pawnRed);
   document.getElementById("red-player").addEventListener("click", function(){movePlayer(diceNumber, "red-player", turn)});
 
-
   let pawnBlue = document.createElement('div');
   pawnBlue.id = "blue-player";
   document.getElementById('position-1').appendChild(pawnBlue);
@@ -272,8 +283,7 @@ fourPlayerButton.addEventListener('click', () => {
 
 });
 
-
-//============================ PLAYER CHOOSE ============================//
+//============================ END PLAYER CHOOSE ============================//
 
 
 //============================ DICE FUNCTION ============================//
@@ -285,7 +295,7 @@ function rollDice() {
     diceNumber = getRandomNumber(1, 6);
     die.dataset.roll = diceNumber;
   });
-  console.log(`Dado: ${diceNumber}`);
+  // console.log(`Dado: ${diceNumber}`);
 
   return diceNumber;
 }
@@ -306,30 +316,4 @@ document.getElementById("button").addEventListener('click', () => {
   document.getElementById("button").style.display = 'none';
 });
 
-// document.getElementById("button").addEventListener("click", rollDice);
-
-//============================ DICE FUNCTION ============================//
-
-
-//============================ START ============================//
-
-// const startButton = document.getElementById('start-button');
-
-// startButton.addEventListener('click', () => {
-
-//   startButton.style.display = 'none';
-  
-//   let pawnRed = document.createElement('div');
-//   pawnRed.id = "red-player";
-//   document.getElementById('position-1').appendChild(pawnRed);
-//   document.getElementById("red-player").addEventListener("click", function(){movePlayer(diceNumber, "red-player", turn)});
-
-
-//   let pawnBlue = document.createElement('div');
-//   pawnBlue.id = "blue-player";
-//   document.getElementById('position-1').appendChild(pawnBlue);
-//   document.getElementById("blue-player").addEventListener("click", function(){movePlayer(diceNumber, "blue-player", turn)});
-
-// });
-
-//============================ START ============================//
+//============================ END DICE FUNCTION ============================//
