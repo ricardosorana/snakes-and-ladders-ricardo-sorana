@@ -28,6 +28,7 @@ h1 {
 }
 
 #red-win-message h1{
+  font-size: 30px;
   color: red;
 }
 
@@ -43,6 +44,7 @@ h1 {
 }
 
 #blue-win-message h1{
+  font-size: 30px;
   color: blue;
 }
 
@@ -58,7 +60,8 @@ h1 {
 }
 
 #green-win-message h1{
-  color: blue;
+  font-size: 30px;
+  color: green;
 }
 
 #white-win-message {
@@ -73,7 +76,8 @@ h1 {
 }
 
 #white-win-message h1{
-  color: blue;
+  font-size: 30px;
+  color: white;
 }
 
 #ladders {
@@ -462,4 +466,5 @@ button:hover {
   border: 2px solid black;
   background-color: red;
   margin-left: 100px;
+  display: none;
 }
