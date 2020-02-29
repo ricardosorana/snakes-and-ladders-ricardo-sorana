@@ -7,11 +7,11 @@ This is a reproduction of the original Snakes & Ladders board game as part of my
 It was a great challenge to develop my first game. At first it seemed it would be hard to achieve all my goals, but I tried to build my project step by step and things started to happen!
 In the end I'm really happy about my work, and I would like to thank my teachers and colleagues for the support that made this possible.
 
-## Getting Started - Falta o link
+## Getting Started
 
 This game works at the browser and does not need any installation.
 
-* Link to run the game in your browser => [HERE](link).
+* Link to run the game in your browser => [HERE](https://ricardosorana.github.io/snakes-and-ladders-ricardo-sorana/).
 
 ## Prerequisites
 
@@ -32,15 +32,16 @@ More details about it in the "Improvements" section of this read.me.
 * The game can be played for two to four players.
 * The game will be played with just one dice.
 * In each color's turn, the player must roll the dice and then click in their own pawn in order to make the move.
+* The standard order established for playing is: Red >> Blue >> Green >> White (depending on the number of players choosen at the begining of the game).
 * Each player starts with a pawn on the starting square (the "1" grid square in the bottom right corner).
 * Pawns follow a fixed route marked on the gameboard which follows a track from the bottom to the top of the playing area, passing once through every square.
 * If a player's pawn lands on the lower-numbered end of a "ladder", the player moves the pawn up to the ladder's higher-numbered square (with another click on the pawn).
 * If the player lands on the higher-numbered square of a "snake", the pawn must be moved down to the snake's lower-numbered square (with another click on the pawn).
+* If a player lands in a square that already contains another player's pawn, this player moves one square back, until there`s an empty square available to land (with another click on the pawn). The exception is the first square (that can have more than one player landed);
+* If a player rolls a 6, the player may, after moving, immediately take another turn (otherwise play passes to the next player in turn).
 * The player who is first to bring their pawn to the last square of the track is the winner.
 * The player must roll the exact number to reach the final square.
 * If the dice roll is too large, the pawn goes off the final square and back again (for example, if a player requiring a 3 to win rolls a 5, the pawn moves forward three spaces, then back two spaces).
-* If a player lands in a square that already contains another player's pawn, this player moves one square back (with another click on the pawn).
-* ** If a player rolls a 6, the player may, after moving, immediately take another turn (otherwise play passes to the next player in turn). (Pendente)
 
 
 * Original Rules (there are other rules with some variations, but this one is the most commonly used): [link](https://www.wikihow.com/Play-Snakes-and-Ladders).
@@ -56,13 +57,12 @@ During the project I had to make some adaptations in order to present a function
 * Fix an issue where a player can move another player's piece after rolling the dice. In this case, a player would only be able to move its respective pawn in its turn.
 * Implement a new way to restart the game. Once a player reaches the end, show a button to restar the game and allow players to start a new game without having to refresh the page.
 * Add responsiveness to the game page to improve mobile experience.
-* ** If a player rolls a 6, the player may, after moving, immediately take another turn (otherwise play passes to the next player in turn). (Pendente)
 
 
 ### CODE IMPROVEMENTS
 
-* The development of my project focused on DOM manipulation methods. In my logic, I didn't use object orientation or any frameworks and tools like Canvas. This made a little bit faster to start the coding process, but it made it harder to maintain and implement some improvements in my code.
-* The Logic may become simpler if we think about an object oriented solution and use some tools such as Canvas to improve each pawn advance inside the board.
+* The development of my project focused on DOM manipulation methods. In my logic, I didn't use object orientation or any frameworks and tools like Canvas. This made a little bit faster to start the coding process, but it was much more difficult to maintain and implement some improvements in my code.
+* The logic may become simpler if we think about an object oriented solution and use some tools such as Canvas to improve each pawn advance inside the board.
 * Better animations can be implemented in order to improve the gamer experience (pawn movement through the board, message boxes, etc.).
 
 

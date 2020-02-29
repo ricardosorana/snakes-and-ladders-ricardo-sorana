@@ -48,7 +48,7 @@ function movePlayer(randomNumber, player, turn) {
   
   pawn.id = player;
 
-  if(diceNumber > 0) {
+  if(diceNumber > 0 && diceNumber < 6) {
     checkTurn();
   }
   
